@@ -1,0 +1,279 @@
+/**
+ * FLDC theme for reveal.js
+ * Author: Erik Baldwin http://github.com/ThatGuyCND
+ *
+ */
+
+ // Default mixins and settings -----------------
+@import "../template/mixins";
+/* @import "../template/settings"; */
+// ----------------------------------------------
+
+// Theme Colors ---------------------------------
+// Color Vars
+ $black: #0f0f0f;
+ $white: #fff;
+ $offWhite: #e1e1e1;
+
+ $darkGrey: #333;
+
+ $gold: #FBB635;
+ $darkGold: #e8a320;
+
+ $lightBlue: #256f8a;
+ $blue: #154664;
+ $darkBlue: #0a2d49;
+ $darkestBlue: #041624;
+ $shimmerBlue: #E2ECEF;
+// ----------------------------------------------
+
+// Fonts ----------------------------------------
+@font-face {
+  font-family: "bebas_neueregular";
+  src: url("../../../fonts/BebasNeue-webfont.eot?#iefix") format("embedded-opentype"),
+       url("../../../fonts/BebasNeue-webfont.woff") format("woff"),
+       url("../../../fonts/BebasNeue-webfont.ttf") format("truetype"),
+       url("../../../fonts/BebasNeue-webfont.svg#bebas_neueregular") format("svg");
+  font-style: normal;
+  font-weight: normal;
+}
+// ----------------------------------------------
+
+// Reveal.JS Overrides --------------------------
+// Background of the presentation
+$backgroundColor: $blue;
+
+// Primary/body text
+$mainFont: 'helvetica', sans-serif;
+$mainFontSize: 36px;
+$mainColor: $offWhite;
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'bebas_neueregular', 'League Gothic', Impact, sans-serif;
+$headingColor: #eee;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingTextShadow: none;
+$headingFontWeight: bold;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 3em;
+$heading2Size: 2em;
+$heading3Size: 1.55em;
+$heading4Size: 1.00em;
+
+// Links and actions
+$linkColor: $gold;
+$linkColorHover: $darkGold;
+
+// Text selection
+$selectionBackgroundColor: $gold;
+$selectionColor: $white;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+@mixin bodyBackground() {
+	background: $backgroundColor;
+}
+
+// Now that variables and settings have been overridden, import the theme defaults
+@import "../template/theme";
+
+.reveal {
+  background-image: image-url('./images/underwater.jpg');
+  background-position: center top;
+
+  .type__text--dark {
+    color: $darkBlue;
+
+    @for $i from 1 through 6 {
+      h#{$i} {
+        color: $darkBlue !important;
+      }
+    }
+  }
+
+  // Force the progress bar and controls to be above everything else
+  .progress,
+  .controls {
+    z-index: 110;
+  }
+}
+// ----------------------------------------------
+
+// Placeholder Classes --------------------------
+%headingTextShadow {
+  text-shadow: 3px 3px 1px rgba($black, 0.6) !important;
+}
+
+// ----------------------------------------------
+
+/**
+ * Top Bar:
+ * Branding and Presenter Info
+ */
+.branding__top-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: 60px;
+  z-index: 100;
+  background-color: rgba($black, 0.8);
+}
+
+.camp__branding {
+  max-width: 50%;
+  float: left;
+  padding-left: 2em;
+}
+
+.camp__presenters {
+  max-width: 50%;
+  float: right;
+  padding-right: 2em;
+}
+
+.branding__logo {
+
+}
+
+.branding__camp--title {
+  display: inline-block;
+  font-family: $headingFont;
+  font-size: $heading2Size;
+  font-weight: $headingFontWeight;
+  line-height: $headingLineHeight;
+  letter-spacing: $headingLetterSpacing;
+  text-transform: $headingTextTransform;
+  text-shadow: $headingTextShadow;
+  word-wrap: break-word;
+  color: #FCB040;
+  margin: 0;
+  padding: {
+    top: 0.375em;
+    left: 0.25em;
+  }
+  position: relative;
+  vertical-align: top;
+  left: 0;
+  z-index: 5;
+}
+
+/**
+ * Global Navigation:
+ * Provides a menu for jumping to a specific section
+ */
+#navigation {
+  display: none;
+/*   position: absolute;
+top: 60px;
+right: auto;
+bottom: 0;
+left: 0;
+width: 60px;
+z-index: 99;
+background-color: rgba($black, 0.8); */
+}
+
+// !importants because of the default image styles
+img.camp--logo {
+  background-color: transparent !important;
+  background-image: none;
+  border: medium none !important;
+  box-shadow: none !important;
+  outline: 0;
+  width: auto;
+  max-width: 50%;
+  height: auto;
+  max-height: 50%;
+}
+
+.list-columns {
+  .column {
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    width: 33%;
+
+    > p {
+      text-align: left;
+    }
+
+    ul {
+      li {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+/* Typography */
+strike {
+  color: #333;
+  opacity: 0.8;
+}
+
+.reveal .reverse-p {
+  margin-top: 1.5em;
+  margin-bottom: 0;
+}
+
+ul.padded-li {
+  li {
+    margin-top: 0.325em;
+    margin-bottom: 0.825em;
+  }
+}
+
+/* Specific Slide Formatting */
+.presentation--title {
+  font-size: 4.5em !important;
+}
+.presentation--title,
+.presentation--title__small {
+  @extend %headingTextShadow;
+}
+
+#presenters {
+  .presenter {
+    width: 50%;
+    float: left;
+  }
+}
+
+img#skydiver {
+  position: absolute;
+  top: -5%;
+  right: 100%;
+  max-height: 90%;
+  height: 30%;
+  z-index: 98;
+
+  &.animated {
+    transition: all 5s ease-in-out 1s;
+    top: -5%;
+    height: 90%;
+    right: -30%;
+  }
+}
+
+.presenter--info__facts {
+  text-align: left;
+}
+
+/* Layout Classes */
+div[class*="l-"] {
+  display: block;
+  float: left;
+}
+
+.l-fifty {
+  width: 50%;
+}

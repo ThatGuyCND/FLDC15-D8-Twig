@@ -1,0 +1,411 @@
+/**
+ * FLDC theme for reveal.js
+ * Author: Erik Baldwin http://github.com/ThatGuyCND
+ *
+ */
+/* @import "../template/settings"; */
+@font-face {
+  font-family: "bebas_neueregular";
+  src: url("../../../fonts/BebasNeue-webfont.eot?#iefix") format("embedded-opentype"), url("../../../fonts/BebasNeue-webfont.woff") format("woff"), url("../../../fonts/BebasNeue-webfont.ttf") format("truetype"), url("../../../fonts/BebasNeue-webfont.svg#bebas_neueregular") format("svg");
+  font-style: normal;
+  font-weight: normal; }
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+body {
+  background: #154664;
+  background-color: #154664; }
+
+.reveal {
+  font-family: 'helvetica', sans-serif;
+  font-size: 36px;
+  font-weight: normal;
+  color: #e1e1e1; }
+
+::selection {
+  color: #fff;
+  background: #FBB635;
+  text-shadow: none; }
+
+.reveal .slides > section, .reveal .slides > section > section {
+  line-height: 1.3;
+  font-weight: inherit; }
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: 0 0 20px 0;
+  color: #eee;
+  font-family: 'bebas_neueregular', 'League Gothic', Impact, sans-serif;
+  font-weight: bold;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+.reveal h1 {
+  font-size: 3em; }
+
+.reveal h2 {
+  font-size: 2em; }
+
+.reveal h3 {
+  font-size: 1.55em; }
+
+.reveal h4 {
+  font-size: 1em; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+  margin: 20px 0;
+  line-height: 1.3; }
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img, .reveal video, .reveal iframe {
+  max-width: 95%;
+  max-height: 95%; }
+
+.reveal strong, .reveal b {
+  font-weight: bold; }
+
+.reveal em {
+  font-style: italic; }
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em; }
+
+.reveal ol {
+  list-style-type: decimal; }
+
+.reveal ul {
+  list-style-type: disc; }
+
+.reveal ul ul {
+  list-style-type: square; }
+
+.reveal ul ul ul {
+  list-style-type: circle; }
+
+.reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+  display: block;
+  margin-left: 40px; }
+
+.reveal dt {
+  font-weight: bold; }
+
+.reveal dd {
+  margin-left: 40px; }
+
+.reveal q, .reveal blockquote {
+  quotes: none; }
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: 20px auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+
+.reveal blockquote p:first-child, .reveal blockquote p:last-child {
+  display: inline-block; }
+
+.reveal q {
+  font-style: italic; }
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+
+.reveal code {
+  font-family: monospace; }
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  background: #3F3F3F;
+  color: #DCDCDC; }
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.reveal table th {
+  font-weight: bold; }
+
+.reveal table th, .reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid; }
+
+.reveal table tr:last-child td {
+  border-bottom: none; }
+
+.reveal sup {
+  vertical-align: super; }
+
+.reveal sub {
+  vertical-align: sub; }
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top; }
+
+.reveal small * {
+  vertical-align: top; }
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+  color: #FBB635;
+  text-decoration: none;
+  -webkit-transition: color 0.15s ease;
+  -moz-transition: color 0.15s ease;
+  transition: color 0.15s ease; }
+
+.reveal a:hover {
+  color: #e8a320;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #df9304; }
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #e1e1e1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+
+.reveal a img {
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #FBB635;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+  border-right-color: #FBB635; }
+
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+  border-left-color: #FBB635; }
+
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #FBB635; }
+
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+  border-top-color: #FBB635; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #e8a320; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #e8a320; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #e8a320; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #e8a320; }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #FBB635;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+.reveal .slide-number {
+  color: #FBB635; }
+
+.reveal {
+  background-image: url("/./images/underwater.jpg");
+  background-position: center top; }
+  .reveal .type__text--dark {
+    color: #0a2d49; }
+    .reveal .type__text--dark h1 {
+      color: #0a2d49 !important; }
+    .reveal .type__text--dark h2 {
+      color: #0a2d49 !important; }
+    .reveal .type__text--dark h3 {
+      color: #0a2d49 !important; }
+    .reveal .type__text--dark h4 {
+      color: #0a2d49 !important; }
+    .reveal .type__text--dark h5 {
+      color: #0a2d49 !important; }
+    .reveal .type__text--dark h6 {
+      color: #0a2d49 !important; }
+  .reveal .progress, .reveal .controls {
+    z-index: 110; }
+
+.presentation--title, .presentation--title__small {
+  text-shadow: 3px 3px 1px rgba(15, 15, 15, 0.6) !important; }
+
+/**
+ * Top Bar:
+ * Branding and Presenter Info
+ */
+.branding__top-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: 60px;
+  z-index: 100;
+  background-color: rgba(15, 15, 15, 0.8); }
+
+.camp__branding {
+  max-width: 50%;
+  float: left;
+  padding-left: 2em; }
+
+.camp__presenters {
+  max-width: 50%;
+  float: right;
+  padding-right: 2em; }
+
+.branding__camp--title {
+  display: inline-block;
+  font-family: 'bebas_neueregular', 'League Gothic', Impact, sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word;
+  color: #FCB040;
+  margin: 0;
+  padding-top: 0.375em;
+  padding-left: 0.25em;
+  position: relative;
+  vertical-align: top;
+  left: 0;
+  z-index: 5; }
+
+/**
+ * Global Navigation:
+ * Provides a menu for jumping to a specific section
+ */
+#navigation {
+  display: none;
+  /*   position: absolute;
+top: 60px;
+right: auto;
+bottom: 0;
+left: 0;
+width: 60px;
+z-index: 99;
+background-color: rgba($black, 0.8); */ }
+
+img.camp--logo {
+  background-color: transparent !important;
+  background-image: none;
+  border: medium none !important;
+  box-shadow: none !important;
+  outline: 0;
+  width: auto;
+  max-width: 50%;
+  height: auto;
+  max-height: 50%; }
+
+.list-columns .column {
+  box-sizing: border-box;
+  display: inline-block;
+  float: left;
+  width: 33%; }
+  .list-columns .column > p {
+    text-align: left; }
+  .list-columns .column ul li {
+    font-size: 24px; }
+
+/* Typography */
+strike {
+  color: #333;
+  opacity: 0.8; }
+
+.reveal .reverse-p {
+  margin-top: 1.5em;
+  margin-bottom: 0; }
+
+ul.padded-li li {
+  margin-top: 0.325em;
+  margin-bottom: 0.825em; }
+
+/* Specific Slide Formatting */
+.presentation--title {
+  font-size: 4.5em !important; }
+
+#presenters .presenter {
+  width: 50%;
+  float: left; }
+
+img#skydiver {
+  position: absolute;
+  top: -5%;
+  right: 100%;
+  max-height: 90%;
+  height: 30%;
+  z-index: 98; }
+  img#skydiver.animated {
+    transition: all 5s ease-in-out 1s;
+    top: -5%;
+    height: 90%;
+    right: -30%; }
+
+.presenter--info__facts {
+  text-align: left; }
+
+/* Layout Classes */
+div[class*="l-"] {
+  display: block;
+  float: left; }
+
+.l-fifty {
+  width: 50%; }
