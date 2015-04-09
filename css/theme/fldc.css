@@ -270,20 +270,59 @@ body {
     color: #0a2d49; }
     .reveal .type__text--dark h1 {
       color: #0a2d49 !important; }
+      .reveal .type__text--dark h1 code {
+        text-transform: lowercase; }
     .reveal .type__text--dark h2 {
       color: #0a2d49 !important; }
+      .reveal .type__text--dark h2 code {
+        text-transform: lowercase; }
     .reveal .type__text--dark h3 {
       color: #0a2d49 !important; }
+      .reveal .type__text--dark h3 code {
+        text-transform: lowercase; }
     .reveal .type__text--dark h4 {
       color: #0a2d49 !important; }
+      .reveal .type__text--dark h4 code {
+        text-transform: lowercase; }
     .reveal .type__text--dark h5 {
       color: #0a2d49 !important; }
+      .reveal .type__text--dark h5 code {
+        text-transform: lowercase; }
     .reveal .type__text--dark h6 {
       color: #0a2d49 !important; }
+      .reveal .type__text--dark h6 code {
+        text-transform: lowercase; }
+  .reveal h1 code {
+    text-transform: lowercase;
+    font-weight: normal; }
+  .reveal h2 code {
+    text-transform: lowercase;
+    font-weight: normal; }
+  .reveal h3 code {
+    text-transform: lowercase;
+    font-weight: normal; }
+  .reveal h4 code {
+    text-transform: lowercase;
+    font-weight: normal; }
+  .reveal h5 code {
+    text-transform: lowercase;
+    font-weight: normal; }
+  .reveal h6 code {
+    text-transform: lowercase;
+    font-weight: normal; }
+  .reveal pre {
+    font-size: 0.5em; }
+    .reveal pre.inline {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle; }
   .reveal .progress, .reveal .controls {
     z-index: 110; }
 
-.presentation--title, .presentation--title__small {
+ul.list--long {
+  font-size: 1.5rem; }
+
+.presentation--title, .presentation--title__small, .slide--title, .slide--title__small, .slide--title__large, .slide--title__xlarge {
   text-shadow: 3px 3px 1px rgba(15, 15, 15, 0.6) !important; }
 
 /**
@@ -299,6 +338,9 @@ body {
   height: 60px;
   z-index: 100;
   background-color: rgba(15, 15, 15, 0.8); }
+  @media screen and (max-width: 400px) {
+    .branding__top-bar {
+      display: none; } }
 
 .camp__branding {
   max-width: 50%;
@@ -309,6 +351,28 @@ body {
   max-width: 50%;
   float: right;
   padding-right: 2em; }
+
+.presenter--name {
+  color: #FBB635;
+  font-family: 'bebas_neueregular', 'League Gothic', Impact, sans-serif;
+  font-size: 2em;
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: top;
+  margin: 0;
+  padding-top: 0.375em; }
+
+.presenter--headshot {
+  border-radius: 100%;
+  border: 4px solid #FBB635;
+  display: inline-block;
+  margin-left: 1em;
+  position: relative;
+  top: 8px; }
+
+.branding__logo {
+  position: relative;
+  top: 10px; }
 
 .branding__camp--title {
   display: inline-block;
@@ -382,6 +446,12 @@ ul.padded-li li {
 .presentation--title {
   font-size: 4.5em !important; }
 
+h1.slide--title__large {
+  font-size: 6em; }
+
+h1.slide--title__xlarge {
+  font-size: 8em; }
+
 #presenters .presenter {
   width: 50%;
   float: left; }
@@ -402,10 +472,18 @@ img#skydiver {
 .presenter--info__facts {
   text-align: left; }
 
+#css-standards {
+  left: -25%; }
+
 /* Layout Classes */
 div[class*="l-"] {
-  display: block;
+  display: inline-block;
   float: left; }
 
 .l-fifty {
   width: 50%; }
+
+.l-third {
+  display: inline-block;
+  float: left;
+  width: 30%; }

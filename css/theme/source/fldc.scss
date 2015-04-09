@@ -94,7 +94,31 @@ $selectionColor: $white;
     @for $i from 1 through 6 {
       h#{$i} {
         color: $darkBlue !important;
+
+        code {
+          text-transform: lowercase;
+        }
       }
+    }
+  }
+
+  @for $i from 1 through 6 {
+    h#{$i} {
+      code {
+        text-transform: lowercase;
+        font-weight: normal;
+      }
+    }
+  }
+
+  // Code examples
+  pre {
+    font-size: 0.5em;
+
+    &.inline {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
     }
   }
 
@@ -103,6 +127,10 @@ $selectionColor: $white;
   .controls {
     z-index: 110;
   }
+}
+
+ul.list--long {
+  font-size: 1.5rem;
 }
 // ----------------------------------------------
 
@@ -126,6 +154,10 @@ $selectionColor: $white;
   height: 60px;
   z-index: 100;
   background-color: rgba($black, 0.8);
+
+  @media screen and (max-width: 400px) {
+    display: none;
+  }
 }
 
 .camp__branding {
@@ -140,8 +172,29 @@ $selectionColor: $white;
   padding-right: 2em;
 }
 
-.branding__logo {
+.presenter--name {
+  color: $gold;
+  font-family: $headingFont;
+  font-size: $heading2Size;
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: top;
+  margin: 0;
+  padding-top: 0.375em;
+}
 
+.presenter--headshot {
+  border-radius: 100%;
+  border: 4px solid $gold;
+  display: inline-block;
+  margin-left: 1em;
+  position: relative;
+  top: 8px;
+}
+
+.branding__logo {
+  position: relative;
+  top: 10px;
 }
 
 .branding__camp--title {
@@ -237,8 +290,20 @@ ul.padded-li {
   font-size: 4.5em !important;
 }
 .presentation--title,
-.presentation--title__small {
+.presentation--title__small,
+.slide--title,
+.slide--title__small,
+.slide--title__large,
+.slide--title__xlarge {
   @extend %headingTextShadow;
+}
+
+h1.slide--title__large {
+  font-size: 6em;
+}
+
+h1.slide--title__xlarge {
+  font-size: 8em;
 }
 
 #presenters {
@@ -268,12 +333,22 @@ img#skydiver {
   text-align: left;
 }
 
+#css-standards {
+  left: -25%;
+}
+
 /* Layout Classes */
 div[class*="l-"] {
-  display: block;
+  display: inline-block;
   float: left;
 }
 
 .l-fifty {
   width: 50%;
+}
+
+.l-third {
+  display: inline-block;
+  float: left;
+  width: 30%;
 }

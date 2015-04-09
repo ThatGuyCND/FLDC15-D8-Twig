@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>reveal.js - The HTML Presentation Framework</title>
+    <title>Twig: Seeing the forest for the trees</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -41,6 +41,7 @@
         <span class="branding__logo"><img src="lib/images/content/drupal-diver_small.png" alt="Dive into Drupal! #FLDC15"></span>
         <h2 class="branding__camp--title">Florida DrupalCamp 2015</h2>
       </div>
+      <div class="camp__presenters"><h4 class="presenter--name">Erik Baldwin</h4><img class="presenter--headshot" src="lib/images/presenter/erik-bowtie_square-small.jpg" alt="Erik Baldwin"></div>
     </header>
 
     <aside id="navigation">
@@ -119,10 +120,1132 @@
             </div>
           </section>
         </section>
+        <!-- Drupal 8 Theming Changes -->
+        <section>
 
-      </div>
+          <section id="d8-theme-changes" data-background="lib/images/backgrounds/d8.png" data-background-size="280px" data-background-repeat="repeat">
+            <h1 class="slide--title">Drupal 8 theming changes</h1>
+            </br>
+            </br>
+            <h4 class="fragment"><a href="https://www.drupal.org/list-changes/published/drupal?keywords_description=&to_branch=&version=&created_op=%3E%3D&created[value]=&created[min]=&created[max]=&impacts[]=3" target="_blank" alt="Drupal Core Change Records that impact themers">Drupal Core Change Records which Impact Themers</a></h4>
+          </section>
 
-    </div>
+          <section name="yaml">
+            <h1 class="slide--title">YAML</h1>
+            <div class="fragment">
+              <h4>themename.info </h4>
+              <pre><code class="text txt" data-trim></code></pre>
+            </div>
+            <div class="fragment">
+              <h4>themename.info.yml</h4>
+              <pre><code class="yml yaml" data-trim></code></pre>
+            </div>
+            <aside class="notes">
+              <p>theme.info is now theme.info.yml and has a shiny new syntax</p>
+            </aside>
+          </section>
+
+          <section name="process-layer" data-background="lib/images/backgrounds/gone.gif">
+            <h1 class="slide--title"><span class="fragment fade-out">Process layer</span></h1>
+            <h2 class="fragment">Gone</h2>
+            <h2 class="fragment">... forever.</h2>
+            <aside class="notes">Process layer: gone forever</aside>
+          </section>
+
+          <section name="template-php">
+            <h2 class="fragment fade-out">template.php</h2>
+            <h2 class="fragment">themename.theme</h2>
+            <aside class="notes">template.php has been renames to themename.theme</aside>
+          </section>
+
+          <section name="theme-function" data-background="lib/images/backgrounds/gtfo.gif">
+            <h2>C'ya Later <code>theme()</code></h2>
+            <div class="fragment">
+              <h4>Drupal 7: <code>theme()</code> call</h4>
+              <pre><code class="php" data-trim>
+                &lt;?php
+                $variables['list'] = theme('item_list', array(
+                  'items' => $items,
+                ));
+
+                /* Render in tpl.php: &lt;?php print $list; ?&gt; */
+              </code></pre>
+            </div>
+            <div class="fragment">
+              <h4>Drupal 8: Render <code>array()</code> declaration</h4>
+              <pre><code class="php" data-trim>
+                &lt;?php
+                $variables['list'] = array(
+                  '#theme' => 'item_list',
+                  '#items' => $items,
+                );
+
+                /* print output in twig.html: {{ list }} */
+              </code></pre>
+            </div>
+            <aside class="notes">
+              <p>Theme functions have been removed and changed into markup files - twig tempaltes - that iterate through arrays of data.</p>
+              <p>Instead of the <code>$list</code> variable being returned as a flat string of HTML that we then print in our tpl.php's, defining our data in a render array allows us to finely control the markup around it.</aside>
+          </section>
+
+          <section name="farewell" data-background="lib/images/backgrounds/farewell.gif">
+            <h1 class="slide--title">farewell</h1>
+            <h3 class="fragment fade-out">drupal_add_css()</h3>
+            <h3 class="fragment fade-out">drupal_add_js()</h3>
+            <h3 class="fragment fade-out">drupal_add_library()</h3>
+            <aside class="notes">"But Erik, how does my theme get it's assets?" While technically this shouldn't be suprising, as these calls were depricated in Drupal 7, I know you still use it, because I do too ... sometimes; when no one is looking. Use <code>#attached</code> on a render array instead.</p></aside>
+          </section>
+
+          <section name="html5" data-background="lib/images/backgrounds/html5.jpg">
+            <!-- <h1 slide--title>HTML5</h1> -->
+            <div class="fragment">
+              <pre><code class="html" data-trim>
+                <header role="banner">
+                  <nav role="navigation">
+                    <a href="/">home</a> | <a href="/info">info</a>
+                  </nav>
+                </header>
+                <main>
+                  <div>
+                    ...
+                  </div>
+                </main>
+                <footer  role="progressbar">
+                </footer>
+
+              </code></pre>
+            </div>
+            <aside class="notes">ARIA roles are supported</aside>
+          </section>
+
+          <section name="clean-markup" data-background-video="lib/video/install-drupal8.mp4">
+            <!-- <h1 class="slide--title">Where's that [#*$%] Template!?</h1> -->
+            <aside class="notes">Here we have the Drupal 8 Installation page which demonstrates lean HTML5 markup, better CSS selectors and a bit of debug code in the markup that shows which template file is responsible for it, as well as named tempalte candidates. We'll talk more about theme_debug later.</aside>
+          </section>
+
+          <section id="css-standards" name="css-standards" data-background="lib/images/backgrounds/css.jpg">
+            <h1 class="slide--title fragment">CSS standards</h1>
+            <div class="fragment">
+              <blockquote>"Part of being a good steward to a successful project is realizing that writing code for yourself is a Bad Idea™. If thousands of people are using your code, then write your code for maximum clarity." - Idan Gazit </blockquote>
+            </div>
+            <h4 class="slide--title__small fragment">://d.o/n/<a href="https://drupal.org/node/1886770" target="_blank">1886770</a></h4>
+            <aside class="notes">We have them! They use some things from SMACSS and BEM.</aside>
+          </section>
+
+          <section name="smacss" data-background="lib/images/backgrounds/smacss.jpg">
+            <!-- <h1 class="slide--title">SMACSS</h1> -->
+            </br>
+            </br>
+            </br>
+            <div class="fragment">
+              <pre><code class="css" data-trim>
+              .notification {
+                  /* general styles for all notifications */
+                }
+                .notification--info {
+                  /* blue color adjustments */
+                }
+              </code></pre>
+            </div>
+            <h4 class="slide--title__small fragment">://d.o/n/<a href="https://www.drupal.org/node/1887918" target="_blank">1887918</a></h4>
+          </section>
+
+          <section name="bem" data-background="lib/images/backgrounds/bem.jpg">
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            <h4 class="slide--title__small fragment"><a href="https://bem.info" target="_blank">bem.info</a></h4>
+          </section>
+
+          <section name="bat">
+            <h1 class="slide--title">B.A.T. CSS File Namescheme</h1>
+              <div class="fragment">
+                <pre><code class="text txt" data-trim>
+                  + css
+                  + base
+                    - normalize.css
+                    - elements.css
+                  + layout
+                    - layout.css
+                    - layout--medium.css
+                    - layout--wide.css
+                  + components
+                    - button.css
+                    - dropdown.css
+                    - pagination.css
+                    - tabs.css
+                  + theme
+                    - theme--light.css
+                    - theme--dark.css
+                </code></pre>
+            </div>
+            <h4 class="slide--title__small fragment">://d.o/n/<a href="https://drupal.org/node/1887922" target="_blank">1887922</a> & ://d.o/n/<a href="https://www.drupal.org/node/1536682" target="_blank">1536682</a></h4>
+          </section>
+
+          <section name="ie" data-background="lib/images/backgrounds/ie.gif">
+            <h1>Less IE support</h1>
+            <h4 class="slide--title__small fragment" data-fragment-index="5">://d.o/p/<a href="https://drupal.org/project/ie8" target="_blank">ie8</a></h4>
+            <div class="fragment" data-fragment-index="1">
+              <h3 class="l-third fragment fade-out" data-fragment-index="2">IE8</h3>
+              <h3 class="l-third fragment fade-out" data-fragment-index="3">IE7</h3>
+              <h3 class="l-third fragment fade-out" data-fragment-index="4">IE6</h3>
+            </div>
+            <aside class="notes"><p>Drupal 8 uses SVG in place of PNG to provide resolution independent icons in the admin UI. No effort is made to cater for browsers that do not support SVG. This includes IE8 and below and Android Browser 2.3 and below.</p></aside>
+          </section>
+
+          <section name="pseudo-selectors">
+            <h2 class="slide--title">CSS3 Pseudo Selectors</h2>
+            <div class="l-fifty fragment">
+              <h4>Drupal 7</h4>
+              <pre><code class="html" data-trim>
+                <ul>
+                  <li class="first odd">Item 1</li>
+                  <li class="even">Item 2</li>
+                  <li class="odd">Item 3</li>
+                  <li class="last even">Item 4</li>
+                </ul>
+              </code></pre>
+              <pre><code class="css" data-trim>
+                li.first { &hellip; }
+                li.last { &hellip; }
+                li.even { &hellip; }
+                li.odd { &hellip; }
+              </code></pre>
+            </div>
+            <div class="l-fifty fragment">
+              <h4>Drupal 8</h4>
+              <pre><code class="html" data-trim>
+                <ul>
+                  <li>Item 1</li>
+                  <li>Item 2</li>
+                  <li>Item 3</li>
+                  <li>Item 4</li>
+                </ul>
+              </code></pre>
+              <pre><code class="css" data-trim>
+                li:first-child { &hellip; }
+                li:last-child { &hellip; }
+                li:nth-of-type(even) { &hellip; }
+                li:nth-of-type(odd) { &hellip; }
+              </code></pre>
+            </div>
+            <aside class="notes"><p>Due to the fact that these older browsers are no longer supported, the css in Drupal core is able to move a big step forward. Instead of adding classes like odd, even, first and last; we are now able to use pseudo selectors.</p></aside>
+          </section>
+
+          <section name="filestructure">
+            <h2>Drupal 8 File Structure</h2>
+            <img src="lib/images/content/filestructure.png">
+            <h4><small> Drupal 8 core - beta-9</small></h4>
+          </section>
+
+          <section name="theme-dir">
+            <h1>./themes</h1>
+            <p>Contrib and Custom themes live in <code>/themes</code></p>
+            <p class="fragment">Multisite? <code>sites/*/themes</code></p>
+          </section>
+
+          <section name="cmi" data-background="lib/images/backgrounds/anticipation.gif">
+            <h1 class="slide--title__xlarge fragment zoom-in">CMI</h1>
+            <aside class="notes"><p>In Drupal, what makes your site unique is often configuration which resides in the database: the current theme, active modules, module-specific configuration, content types, and so on.</p>
+              <p>One major goal for Druapl 8 is moving all of that configuration from the database to store it in code, therefore only leaving content in the database.</p>
+              <p>CMI also allows us to define theme specific configuration: Image Styles, Breakpoints</p></aside>
+          </section>
+
+          <section name="cmi-image-style">
+            <!-- <img src="lib/images/content/cmi_image-style.jpg" alt="CMI: Image Style"> -->
+            <h2>Image Style</h2>
+            <pre><code class="txt text" data-trim>
+              uuid: b9162308-bf22-4a51-a609-9f4fe13cfca9
+              langcode: en
+              status: true
+              dependencies: {  }
+              name: thumbnail_small
+              label: thumbnail__small
+              effects:
+                b9162308-bf22-4a51-a609-9f4fe13cfca9:
+                  uuid: b9162308-bf22-4a51-a609-9f4fe13cfca9
+                  id: image_scale_and_crop
+                  weight: 1
+                  data:
+                    width: 48
+                    height: 48
+            </code></pre>
+          </section>
+
+          <section name="cmi-breakpoints">
+            <!-- <img src="lib/images/content/cmi_breakpoints.jpg" alt="CMI: Theme Breakpoints"> -->
+            <h2>Breakpoints</h2>
+            <pre><code class="txt text" data-trim>
+              bartik.mobile:
+                label: mobile
+                mediaQuery: '(min-width: 0px)'
+                weight: 0
+                multipliers:
+                  - 1x
+              bartik.narrow:
+                label: narrow
+                mediaQuery: 'all and (min-width: 560px) and (max-width: 850px)'
+                weight: 1
+                multipliers:
+                  - 1x
+              bartik.wide:
+                label: wide
+                mediaQuery: 'all and (min-width: 851px)'
+                weight: 2
+                multipliers:
+                  - 1x
+            </code></pre>
+          </section>
+
+        </section>
+
+        <!-- What is Twig? -->
+        <section id="twig">
+
+          <section name="what-is-twig" class="title-slide" data-background="lib/images/backgrounds/bamboo.jpg">
+            <h1 class="slide--title">What is Twig?</h1>
+            <h3 class="slide--title__small fragment">Twig is a modern template engine for PHP</h3>
+          </section>
+
+          <section>
+            <h2>Why another template engine?</h2>
+            <p class="fragment">&hellip; beside the fact that PHP Template is old, and "broken"</p>
+              <ul style="text-align: left; width: 70%">
+                <li class="fragment roll-in">Concise</li>
+                <li class="fragment roll-in">Template Oriented Syntax</li>
+                <li class="fragment roll-in">Full Featured</li>
+                <li class="fragment roll-in">Easy to Learn</li>
+                <li class="fragment roll-in">Extensibility</li>
+                <li class="fragment roll-in">Unit Tested</li>
+                <li class="fragment roll-in">Documented</li>
+                <li class="fragment roll-in">Secure</li>
+                <li class="fragment roll-in">Clear Error Messages</li>
+                <li class="fragment roll-in">Fast</li>
+              </ul>
+          </section>
+
+        </section>
+        <!-- Twig Basics -->
+        <section id="basics">
+
+          <section name="twig-basics" class="title-slide type__text--dark" data-background="lib/images/backgrounds/twig.jpg">
+            <h1 class="slide--title">Twig Basics</h1>
+          </section>
+
+          <section class="basic--syntax">
+            <p>There are 3 basic block delimiters in Twig:</p>
+            <ul>
+              <li class="fragment roll-in"><pre class="inline"><code class="twig">{{ foo.bar }}</code></pre></li>
+              <li class="fragment roll-in"><pre class="inline"><code class="twig">{% set var = fubar %}</code></pre></li>
+              <li class="fragment roll-in"><pre class="inline"><code class="twig">{# comments comments comments #}</code></pre></li>
+            </ul>
+            </br>
+            <p class="fragment roll-in">And one special string interpolation delimiter.</p>
+            <ul>
+              <li class="fragment roll-in"><pre class="inline"><code class="twig">#{}</code></pre></li>
+              <li class="fragment roll-in"><pre class="inline"><code class="twig">{{ "foo #{bar} baz" }}</code></pre></li>
+              <li class="fragment roll-in"><pre class="inline"><code class="twig">{{ "foo #{1 + 2} baz" }}</code></pre></li>
+            </ul>
+            <aside class="notes"><p>Three basic Twig delimeters:</br><ul><li>Print statements</li><li>Definitions</li><li><li>Comments</li></ul>. There is also a special string interpolation delimiter.</p></aside>
+          </section>
+
+          <section class="basic--functions">
+            <div class="l-fifty">
+              <h5>Twig Filters</h3>
+              <img src="lib/images/content/filters.png" alt="Twig Filters" />
+            </div>
+            <div class="l-fifty">
+              <h5>Drupal Filters &amp; Functions</h3>
+              <ul>
+                <li><span>Translation</span>
+                  <ul>
+                    <li>
+                      <pre class="inline"><code class="twig" data-trim>{{ form.label|t }}</code></pre>
+                    </li>
+                  </ul>
+                </li>
+                <li><span>Removal</span>
+                  <ul>
+                    <li>
+                      <pre class="inline"><code calss="twig" data-trim>{{ attribute|without('class') }}</code></pre>
+                    </li>
+                  </ul>
+                </li>
+                <li><span>URL [changes to an alias]</span>
+                  <ul>
+                    <li>
+                      <pre class="inline"><code class="twig" data-trim>{{ url('node/1') }}</code></pre>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <aside class="notes">
+              <p>Use filters to modify variables.</p><p>Filters are separated from the variable by a pipe symbol (|) and may have optional arguments in parentheses. Multiple filters can be chained. The output of one filter is applied to the next.</p>
+              <p>We will get to more of Drupal's custom Twig filter later; we'll also build our own - or attempt to anyhow.</p>
+            </aside>
+          </section>
+
+        </section>
+
+        <section id="code-differences">
+
+          <section class="title-slide type__text--dark" data-background="lib/images/backgrounds/twig-phptpl.jpg">
+            </br>
+            </br>
+            <h1 class="slide--title">PHP Template </br><span style="font-size: 0.5em">&ndash; vs &ndash;</span></br> Twig</h1>
+          </section>
+          <section>
+            <p class="reverse-p">Docblock</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>
+                &lt;?php
+/**
+ * @file
+ * File description
+ */
+?>
+              </code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>
+                {#
+/**
+ * @file
+ * File description
+ */
+#}
+              </code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">File &amp; Function names</h2>
+            <p class="reverse-p">File Names</p>
+            <div class="l-fifty">
+              <pre><code class="txt text" data-trim>node--article.tpl.php</code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="txt text" data-trim>node--article.html.twig</code></pre>
+            </div>
+            <p class="reverse-p">Function Names</p>
+            <div class="l-fifty">
+              <pre><code class="txt text" data-trim>theme_node_links()</code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="txt text" data-trim>node-links.html.twig</code></pre>
+            </div>
+            <p class="fragment reverse-p">that's right, all theme functions are now markup files. <span class="fragment">wewt!</span></p>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Variables</h2>
+            <p class="reverse-p">Printing a variable</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;div class="content">&lt;?php print $content; ?>&lt;/div></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>&lt;div class="content">{{ content }}&lt;/div></code></pre>
+            </div>
+            <p class="reverse-p">Printing a hash key item</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php print $item['#item']['alt']; ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{{ item['#item'].alt }}</code></pre>
+            </div>
+            <p class="reverse-p">Assigning a variable</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php $custom_var = $content->comments; ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% set custom_var = content.comments %}</code></pre>
+            </div>
+            <p class="reverse-p">Assigning an array</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php $args = array('!author' => $author, '!date' => $created); ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% set args = {'!author': author, '!date': created} %}</code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Conditionals</h2>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php if ($content->comments): endif; ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% if content.comments %} {% endif %}</code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php if (!empty($content->comments)): endif; ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% if content.comments is not empty %} {% endif %}</code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php if (isset($content->comments)): endif; ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% if content.comments is defined %} {% endif %}</code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php if ($count > 0): endif; ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% if count > 0 %} {% endif %}</code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Control Structures</h2>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php foreach ($users as $user) {} ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{% for user in users %} {% endfor %}</code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Filters</h2>
+            <p class="reverse-p">Check Plain</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php print check_plain($title); ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{{ title|striptags }}</code></pre>
+            </div>
+            <p class="reverse-p">Translate</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php print t('Home'); ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>{{ 'Home'|t }}</code></pre>
+            </div>
+          </section>
+
+          <section>
+            <p class="reverse-p">Translate w/ substitutions</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php print t('Welcome, @username', array('@username' => $user->name)); ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>
+{{ 'Welcome, @username'|t({ '@username': user.name }) }}
+
+{% set username = user.name %}
+{% trans %}
+  Welcome, {{ username }}
+{% endtrans %}
+              </code></pre>
+            </div>
+            <p class="reverse-p">Implode list</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php echo implode(', ', $usernames); ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>
+{{ usernames | join(', ') }}
+{{ usernames }}
+              </code></pre>
+            </div>
+            <p class="reverse-p">Escape</p>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>&lt;?php echo check_plain($title); ?></code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre><code class="twig" data-trim>
+{{ title|e }}
+{{ title }}
+              </code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">White Space Control</h2>
+            <p class="fragment reverse-p"><code>-->&nbsp;                 &nbsp;&lt;--</code></p>
+            <div class="fragment">
+              <p>D8 theming handbook guidelines</p>
+              <pre><code class="twig" data-trim>
+                &lt;div class="body">
+                  {{- block.content -}}
+                &lt;/div>
+              </code></pre>
+            </div>
+            <div class="fragment">
+              <div>is the same as typing:</div>
+              <pre><code data-trim>&lt;div class="body">{{ block.content }}&lt;/div></code></pre>
+            </div>
+            <aside class="notes"><p>Whitespace?! It's that <i>stuff</i> between everything - space.</p></aside>
+          </section>
+
+          <!-- The following may not be true anymore -->
+          <!-- <section>
+            <p class="reverse-p">Twig Documentation</p>
+            <div class="fragment">
+              <pre><code class="twig" data-trim>
+                {% spaceless %}
+                  &lt;div>
+                    &lt;strong>foo bar&lt;/strong>
+                  &lt;/div>
+                {% endspaceless %}
+
+                {# output will be &lt;div>&lt;strong>foo bar&lt;/strong>&lt;/div> #}
+              </code></pre>
+            </div>
+            <div class="fragment">
+              <pre><code class="twig" data-trim>
+                {% set value = 'no spaces' %}
+                &lt;li>    {{- value }}    &lt;/li>
+
+                {# outputs '&lt;li>no spaces    &lt;/li>' #}
+              </code></pre>
+            </div>
+            <div class="fragment">
+              <p class="reverse-p">NOTE: None of these currently remove new lines in D8. <span class="fragment highlight-red">WTF?!?</span></p>
+            </div>
+          </section> -->
+
+        </section>
+
+        <!-- Data Interactions -->
+        <section id="data-layer">
+
+          <section class="title-slide" data-background="lib/images/backgrounds/small-things.gif">
+            <h1 class="slide--title__large">Data</h1>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            <h2 class="slide--title__small fragment"><pre class="inline"><code class="txt text" data-trim>All the [small] things</code></pre></h2>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Dot Notation FTMFW!</h2>
+            </br>
+            <p>You can use a dot (<code class="txt text" data-trim>.</code>) to access attributes of a variable (methods or properties of a PHP object, or items of a PHP array), or the so-called "subscript" syntax (<code class="txt text" data-trim>[]</code>)</p>
+            </br>
+            <pre><code class="twig" data-trim>
+{{ foo.bar }}
+{{ foo['bar'] }}
+            </code></pre>
+            </br>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Caveat</h2>
+            <p class="fragment roll-in">special character: <code> - </code></p>
+            </br>
+            <div class="fragment">
+              <pre><code class="twig" data-trim>
+{# equivalent to the non-working foo.data-foo #}
+{{ attribute(foo, 'data-foo') }}
+              </code></pre>
+            </div>
+            <aside class="notes"><p>When the attribute contains special characters (like - that would be interpreted as the minus operator), use the attribute function instead to access the variable attribute:</p></aside>
+          </section>
+
+        </section>
+        <!-- Template inheritance and codeblocks -->
+        <section id="templates" class="title-slide">
+
+          <section class="namespacing">
+            <h2 class="slide--title">Template Inheritance</h2>
+            </br>
+              <pre><code class="twig" data-trim>
+{# /path/to/template/layout.html.twig #}
+{% extends '@bartik/templates/page.html.twig' %}
+
+{% block sidebar %}
+  your overrides would go here
+{% endblock sidebar %}
+              </code></pre>
+              <h4 class="slide--title__small fragment">://d.o/n/<a href="https://www.drupal.org/node/1783184" target="_blank">1783184</a></h4>
+              <aside class="notes">
+                <p>Currently, template inheritance with <code>@</code> namespacing has been postponed in core. So while this example isn't accurate, you can still leverage template inheritance within your theme directory.</p>
+                <p>Notice also that we're inheriting this template only to change one portion of it. Twig calls this a "block", but that's confusing, so in core these are referred to as "code blocks".</p>
+              </aside>
+          </section>
+
+        </section>
+
+        <!-- Theme Functions -->
+        <section id="theme-functions">
+
+          <section class="title-slide">
+            <h2 class="slide--title">Theme Functions</h2>
+            <p>There are still a lot of core theme functions that need your help!</p>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Dates</h2>
+            <p>
+              <pre><code class="php" data-trim>
+&lt;?php /* @file includes/form.inc */
+function theme_date($variables) {
+  $element = $variables['element'];
+
+  $attributes = array();
+  if (isset($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  if (!empty($element['#attributes']['class'])) {
+    $attributes['class'] = (array) $element['#attributes']['class'];
+  }
+  $attributes['class'][] = 'container-inline';
+
+  return '&lt;div' . drupal_attributes($attributes) . '>' . drupal_render_children($element) . '&lt;/div>';
+}?>
+              </code></pre>
+            </p>
+            <p>
+              <pre class="fragment"><code class="twig" data-trim>
+{# /core/modules/system/templates/datetime/html.twig #}
+&lt;time{{ attributes }}>{{ html ? text|raw : text|escape }}&lt;/time>
+              </code></pre>
+            </p>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Item List</h2>
+            <div class="l-fifty">
+              <pre><code data-trim class="php">
+&lt;?php /* @file includes/theme.inc */
+function theme_item_list($variables) {
+  $items = $variables['items'];
+  $title = $variables['title'];
+  $type = $variables['type'];
+  $attributes = $variables['attributes'];
+
+  // Only output the list container and title, if there are any list items.
+  // Check to see whether the block title exists before adding a header.
+  // Empty headers are not semantic and present accessibility challenges.
+  $output = '&lt;div class="item-list">';
+  if (isset($title) && $title !== '') {
+    $output .= '&lt;h3>' . $title . '&lt;/h3>';
+  }
+
+  if (!empty($items)) {
+    $output .= "&lt;$type" . drupal_attributes($attributes) . '>';
+    $num_items = count($items);
+    $i = 0;
+    foreach ($items as $item) {
+      $attributes = array();
+      $children = array();
+      $data = '';
+      $i++;
+      if (is_array($item)) {
+foreach ($item as $key => $value) {
+  if ($key == 'data') {
+    $data = $value;
+  }
+  elseif ($key == 'children') {
+    $children = $value;
+  }
+  else {
+    $attributes[$key] = $value;
+  }
+}
+      }
+      else {
+$data = $item;
+      }
+      if (count($children) > 0) {
+// Render nested list.
+$data .= theme_item_list(array('items' => $children, 'title' => NULL, 'type' => $type, 'attributes' => $attributes));
+      }
+      if ($i == 1) {
+$attributes['class'][] = 'first';
+      }
+      if ($i == $num_items) {
+$attributes['class'][] = 'last';
+      }
+      $output .= '&lt;li' . drupal_attributes($attributes) . '>' . $data . "&lt;/li>\n";
+    }
+    $output .= "&lt;/$type>";
+  }
+  $output .= '&lt;/div>';
+  return $output;
+}?>
+              </code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre class="fragment"><code class="twig" data-trim>
+{# /core/modules/system/templates/item-list.html.twig #}
+{%- if items or empty -%}
+  &lt;div class="item-list">
+    {%- if title -%}
+      &lt;h3>{{ title }}&lt;/h3>
+    {%- endif -%}
+    {%- if items -%}
+      <{{ list_type }}{{ attributes }}>
+        {%- for item in items -%}
+          &lt;li{{ item.attributes }}>{{ item.value }}&lt;/li>
+        {%- endfor -%}
+      </{{ list_type }}>
+    {%- else -%}
+      {{- empty -}}
+    {%- endif -%}
+  &lt;/div>
+{%- endif %}
+              </code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Links</h2>
+            <div class="l-fifty">
+              <pre><code class="php" data-trim>
+&lt;?php /* includes/theme.inc */
+function theme_links($variables) {
+  $links = $variables['links'];
+  $attributes = $variables['attributes'];
+  $heading = $variables['heading'];
+  global $language_url;
+  $output = '';
+
+  if (count($links) > 0) {
+    $output = '';
+
+    // Treat the heading first if it is present to prepend it to the
+    // list of links.
+    if (!empty($heading)) {
+      if (is_string($heading)) {
+// Prepare the array that will be used when the passed heading
+// is a string.
+$heading = array(
+  'text' => $heading,
+
+  // Set the default level of the heading.
+  'level' => 'h2',
+);
+      }
+      $output .= '&lt;' . $heading['level'];
+      if (!empty($heading['class'])) {
+$output .= drupal_attributes(array('class' => $heading['class']));
+      }
+      $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
+    }
+
+    $output .= '&lt;ul' . drupal_attributes($attributes) . '>';
+
+    $num_links = count($links);
+    $i = 1;
+
+    foreach ($links as $key => $link) {
+      $class = array($key);
+
+      // Add first, last and active classes to the list of links to help out themers.
+      if ($i == 1) {
+$class[] = 'first';
+      }
+      if ($i == $num_links) {
+$class[] = 'last';
+      }
+      if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '&lt;front>' && drupal_is_front_page())) && (empty($link['language']) || $link['language']->language == $language_url->language)) {
+$class[] = 'active';
+      }
+      $output .= '&lt;li' . drupal_attributes(array('class' => $class)) . '>';
+
+      if (isset($link['href'])) {
+// Pass in $link as $options, they share the same keys.
+$output .= l($link['title'], $link['href'], $link);
+      }
+      elseif (!empty($link['title'])) {
+// Some links are actually not links, but we wrap these in &lt;span> for adding title and class attributes.
+if (empty($link['html'])) {
+  $link['title'] = check_plain($link['title']);
+}
+$span_attributes = '';
+if (isset($link['attributes'])) {
+  $span_attributes = drupal_attributes($link['attributes']);
+}
+$output .= '&lt;span' . $span_attributes . '>' . $link['title'] . '&lt;/span>';
+      }
+
+      $i++;
+      $output .= "&lt;/li>\n";
+    }
+
+    $output .= '&lt;/ul>';
+  }
+
+  return $output;
+}?>
+              </code></pre>
+            </div>
+            <div class="l-fifty">
+              <pre class="fragment"><code class="twig" data-trim>
+{# /core/modules/system/templates/links.html.twig #}
+{% if links -%}
+  {%- if heading -%}
+    {%- if heading.level -%}
+      <{{ heading.level }}{{ heading.attributes }}>{{ heading.text }}</{{ heading.level }}>
+    {%- else -%}
+      &lt;h2{{ heading.attributes }}>{{ heading.text }}&lt;/h2>
+    {%- endif -%}
+  {%- endif -%}
+  <ul{{ attributes }}>
+    {%- for item in links -%}
+      <li{{ item.attributes }}>
+{%- if item.link -%}
+  {{ item.link }}
+{%- elseif item.text_attributes -%}
+  &lt;span{{ item.text_attributes }}>{{ item.text }}&lt;/span>
+{%- else -%}
+  {{ item.text }}
+{%- endif -%}
+      &lt;/li>
+    {%- endfor -%}
+  &lt;/ul>
+{%- endif %}
+              </code></pre>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="slide--title">Breadcrumb</h2>
+            <p>
+              <pre><code class="php" data-trim>
+&lt;?php /* includes/theme.inc */
+function theme_breadcrumb($variables) {
+  $breadcrumb = $variables['breadcrumb'];
+
+  if (!empty($breadcrumb)) {
+    // Provide a navigational heading to give context for breadcrumb links to
+    // screen-reader users. Make the heading invisible with .element-invisible.
+    $output = '&lt;h2 class="element-invisible">' . t('You are here') . '&lt;/h2>';
+
+    $output .= '&lt;div class="breadcrumb">' . implode(' >> ', $breadcrumb) . '&lt;/div>';
+    return $output;
+  }
+}?>
+              </code></pre>
+            </p>
+            <p>
+              <pre class="fragment"><code class="twig" data-trim>
+{# /core/modules/system/templates/breadcrumb.html.twig #}
+{% if breadcrumb %}
+  &lt;nav class="breadcrumb" role="navigation">
+    &lt;h2 class="visually-hidden">{{ 'You are here'|t }}&lt;/h2>
+    &lt;ol>
+    {% for item in breadcrumb %}
+      &lt;li>{{ item }}&lt;/li>
+    {% endfor %}
+    &lt;/ol>
+  &lt;/nav>
+{% endif %}
+              </code></pre>
+            </p>
+          </section>
+
+        </section>
+
+        <!-- Twig Debugging -->
+        <section id="debugging">
+
+          <section class="title-slide">
+            <h1 class="slide--title">Twig Debugging</h1>
+            </br>
+            <p class="fragment roll-in">Developers can change an environment's variables in settings.php to allow for different configuration per environment. Drupal core uses the Settings API to access this information when building the Twig environment.</p>
+            <aside class="notes">
+              <p>By default, the Twig theming engine compiles templates into PHP code and stores the compiled code in memory. Compiled code is unsuitable for development, since changes in Twig templates are not immediately updated in your Drupal site.</p>
+              <p>Developers can change an environment's variables in settings.php to allow for different configuration per environment. Drupal core uses the Settings API to access this information when building the Twig environment.</p>
+            </aside>
+          </section>
+
+          <section name="debug">
+            <h2 class="slide--title">Twig Debug</h2>
+            <pre class="fragment"><code class="php" data-trim>$settings['twig_debug'] = TRUE;</code></pre>
+            <ul class="list--long">
+              <li class="fragment roll-in">The markup of each Twig template is surrounded by HTML comments that contain theming information, such as template file name suggestions.</li>
+              <li class="fragment roll-in">Note that this debugging markup will cause automated tests that directly check rendered HTML to fail. When running automated tests, 'twig_debug' should be set to FALSE.</li>
+              <li class="fragment roll-in">The dump() function can be used in Twig templates to output information about template variables.</li>
+              <li class="fragment roll-in">Twig templates are automatically recompiled whenever the source code changes (see twig_auto_reload below).</li>
+              <li class="fragment roll-in">Not recommended in production environments <span class="fragment highlight-red">(Default: FALSE)</span>.</li>
+            </ul>
+          </section>
+
+          <section name="autoreload">
+            <h2 class="slide--title">Twig Auto-reload</h2>
+            <pre class="fragment"><code class="php" data-trim>$settings['twig_auto_reload'] = TRUE;</code></pre>
+            <ul class="list--long">
+              <li class="fragment roll-in">Automatically recompile Twig templates whenever the source code changes. If you don't provide a value for twig_auto_reload, it will be determined based on the value of twig_debug.</li>
+              <li class="fragment roll-in">Not recommended in production environments <span class="fragment highlight-red">(Default: NULL)</span>.</li>
+            </ul>
+          </section>
+
+          <section name="cache">
+            <h2 class="slide--title">Twig Cache</h2>
+            <pre class="fragment"><code class="php" data-trim>$settings['twig_cache'] = FALSE;</code></pre>
+            <ul class="list--long">
+              <li class="fragment roll-in">By default, Twig templates will be compiled and stored in the filesystem to increase performance. Disabling the Twig cache will recompile the templates from source each time they are used. In most cases the twig_auto_reload setting above should be enabled rather than disabling the Twig cache.</li>
+              <li class="fragment roll-in">Not recommended in production environments <span class="fragment highligh-red">(Default: TRUE).</span></li>
+            </ul>
+          </section>
+
+        </section>
+
+        <!-- Documentation -->
+        <section id="documentation">
+
+          <section class="title-slide">
+            <h1 class="slide--title">Documentation </br> & </br> Resources</h1>
+          </section>
+
+          <section name="sensiolabs">
+            <h2 class="slide--title">Twig Documentation</h2>
+            <ul>
+              <li class="fragment"><a href="http://php.net/strtolower" target="_blank">http://php.net/strtolower</a></li>
+              <li class="fragment"><a href="http://twig.sensiolabs.org/lower" target="_blank">http://twig.sensiolabs.org/lower</a></li>
+            </ul>
+            <aside class="notes"><p>Twig documentation is easy to get to, just like it is for PHP.net.</p></aside>
+          </section>
+
+          <section name="resources">
+            <h2 class="slide--title">Resources</h2>
+            <div class="l-fifty">
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+            <div class="l-fifty">
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+            <aside class="notes">
+              <p></p>
+            </aside>
+          </section>
+
+        </section>
+
+        <section id="intermission">
+
+          <section class="title-slide type__text--dark" data-background="lib/images/backgrounds/intermission.gif">
+            <h1 class="slide--title__large">Intermission</h1>
+          </section>
+
+        </section>
+
+        <!-- Twig Macros -->
+        <section id="macros">
+
+          <section class="title-slide">
+            <h1 class="slide--title">Macros</h1>
+            <p class="fragment">Reusable markup templates with variable insertion</p>
+            <aside class="notes">
+              <p>Think: PHP Template functions for markup.</p>
+            </aside>
+          </section>
+
+          <section name="macro--menu-links">
+            <h3 class="slide--title">Macro Example: Menu links</h3>
+            <p class="fragment">
+              <pre><code class="twig" data-trim>
+{# menu.twig #}
+{% macro menu_links(links) %}
+  {% if links %}
+    &lt;ul>
+      {% for link in links %}
+        &lt;li>
+          &lt;a href="{{ link.href }}">{{ link.name }}&lt;/a>
+          {% if link.links %}
+            {{ _self.menu_links(link.links) }}
+          {% endif %}
+        &lt;/li>
+      {% endfor %}
+    &lt;/ul>
+  {% endif %}
+{% endmacro %}
+              </code></pre>
+            </p>
+            <p>
+              <pre><code class="twig" data-trim>
+{# somewhere in a twig template in our theme #}
+{% import "menu.twig" as menu %}
+&lt;nav>
+  {{ menu.menu_links(links) }}
+&lt;/nav>
+              </code></pre>
+            </p>
+          </section>
+
+      </section>
+
+      <!-- Libraries -->
+      <section id="libraries">
+
+        <section class="title-slide">
+          <h1 class="slide--title">Libraries</h1>
+          <p class="fragment"><span class="fragment fade-out">hook_library_info()</span><span class="fragment" style="position: relative; left: 0.325em"><strike style="display: inline-block; position: absolute; right: calc(100% + 0.325em)">hook_library_info()</strike></span></p>
+          <div class="l-fifty">
+            <pre class="fragment"><code class="yml yaml" data-trim>
+# @file MYTHEME.libraries.yml
+mytheme-corescripts:
+  version: VERSION
+  js:
+    js/mytheme.script.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+            </code></pre>
+          </div>
+          <div class="l-fifty">
+            <pre class="fragment"><code class="php" data-trim>
+&lt;?php /** @file MYTHEME.theme */
+function MYTHEME_page_alter(&$page) {
+  // Render the library as laid out in MYTHEME.libraries.yml
+  $page['#attached']['library'][] = 'mytheme/mytheme-corescripts';
+}?>
+            </code></pre>
+            <pre class="fragment"><code class="yml yaml" data-trim>
+# @file MYTHEME.info.yml
+libraries:
+  - mytheme/mytheme-corescripts
+          </code></pre>
+          </div>
+          <aside class="notes"></aside>
+        </section>
+
+      </section>
+
+      <!-- Attributes -->
+        <section id="attributes">
+
+          <section class="title-slide">
+            <h1 class="slide--title">Attributes</h1>
+            <h2 class="slide--title__small fragment">completely different in D8</h2>
+            <aside class="notes">
+              <p class="fragment">Attributes are now an object</p>
+            </aside>
+          </section>
+          <!-- <section></section> -->
+        </section>
+
+      </div><!-- / .slides -->
+
+    </div><!-- / .reveal -->
 
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.js"></script>
