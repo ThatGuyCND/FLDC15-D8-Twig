@@ -1428,19 +1428,43 @@ picker:
 
           <section>
             <h2 class="slide--title"><code>{{ attributes }}</code></h2>
-            <pre class="fragment"><code class="twig" data-trim contenteditable><article {{attributes}}> &hellip; </article></code></pre>
-            <pre class="fragment"><code class="twig" data-trim contenteditable><article class="{{attributes.class}}" {{attributes}}> &hellip; </article></code> </pre>
+            <pre class="fragment"><code class="twig" data-trim contenteditable>&lt;article {{ attributes }}> &hellip; &lt;/article></code></pre>
+            <pre class="fragment"><code class="twig" data-trim contenteditable>&lt;article class="{{ attributes.class }}" {{ attributes }}> &hellip; &lt;/article></code></pre>
             <pre class="fragment"><code class="twig" data-trim contenteditable>
-<article
+&lt;article
   class="{{ attributes.class }}"
   role="{{ attributes.role }}"
   {{ attributes }}
 >
 &hellip;
-</article>
-            </code> </pre>
+&lt;/article>
+            </code></pre>
+            <pre class="fragment"><code class="twig" data-trim contenteditable>&lt;article {{ attributes.addClass('foo').removeClass('bar') }}> &hellip; &lt;/article></code></pre>
           </section>
 
+        </section>
+
+        <section id="custom-filter">
+          <section class="title-slide">
+            <h1 class="slide--title">Cutsom Filters</h1>
+            <aside class="notes"><p>You can create your own Twig filters to extend Twig. In Drupal 8 this can be done by creating a module that provides the filter.</p></aside>
+          </section>
+          <section name="custom-filter-step1">
+            <h2 class="slide--title">1. Create a Module</h2>
+            <aside class="notes">We'll need to create a custom module directory and then the corresponding module.info.yml to make our module available to Drupal 8.</aside>
+          </section>
+          <section name="custom-filter-step2">
+            <h2 class="slide--title">2. </h2>
+            <aside class="notes"></aside>
+          </section>
+          <section name="custom-filter-step3">
+            <h2 class="slide--title">3. </h2>
+            <aside class="notes"></aside>
+          </section>
+          <section name="custom-filter-step4">
+            <h2 class="slide--title">4. </h2>
+            <aside class="notes"></aside>
+          </section>
         </section>
 
       </div><!-- / .slides -->
