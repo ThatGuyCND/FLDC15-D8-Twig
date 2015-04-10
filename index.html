@@ -164,7 +164,7 @@ regions[help] = 'Help'
               </code></pre>
             </div>
             <div class="l-fifty fragment">
-              <h4>themename.info.yml</h4>
+              <h4>seven.info.yml</h4>
               <pre><code class="yml yaml" data-trim>
 name: Seven
 type: theme
@@ -437,6 +437,7 @@ effects:
       width: 48
       height: 48
             </code></pre>
+            <p><small><code style="txt text">themes/{theme-name}/config/install/image.style.thumbnail_small.yml</code></small></p>
           </section>
 
           <section name="cmi-breakpoints">
@@ -462,6 +463,7 @@ bartik.wide:
   multipliers:
     - 1x
             </code></pre>
+            <p><small><code class="txt text">core/themes/bartik/bartik.breakpoints.yml</code></small></p>
           </section>
 
         </section>
@@ -895,13 +897,18 @@ bartik.wide:
             </aside>
           </section>
 
-          <!-- <section name="twig-dgaf">
-            <h2 class="slide--title"></h2>
-            <pre><code class="php" data-trim="">
-
+          <section name="twig-dgaf">
+            <h2 class="slide--title"><code>{{ user.name }}</code> </h2>
+            <h4 class="slide--title__small fragment">the dot is our magic bullet</h4>
+            <pre class="fragment"><code class="php" data-trim>
+$user['name']      /* array with valid element */
+$user->name        /* object with valid property */
+$user->name()      /* object with valid method */
+$user->getName()   /* object with valid getVar() method */
+$user->isName()    /* object with valid isVar() method */
             </code></pre>
-            <aside class="notes"></aside>
-          </section> -->
+            <aside class="notes"><p>Behind the scenes, Twig will process dot notated data in the following manner. If none of these return a value, then the variable is returned as <code>null</code>.</p></aside>
+          </section>
 
         </section>
         <!-- Template inheritance and codeblocks -->
@@ -1298,6 +1305,7 @@ function theme_breadcrumb($variables) {
 
           <section class="title-slide type__text--dark" data-background="lib/images/backgrounds/intermission.gif">
             <h1 class="slide--title__large">Intermission</h1>
+            <h2 class="slide--title">Come back for part 2!</h2>
           </section>
 
         </section>
