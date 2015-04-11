@@ -1278,22 +1278,22 @@ function theme_breadcrumb($variables) {
 
           <section name="resources">
             <h2 class="slide--title">Resources</h2>
-            <div class="l-fifty">
+            <div>
+              <ul>
+                <li>WIP: <a href="https://github.com/sqndr/d8-theming-guide" target="_blank">D8 Theming Guide</a></li>
+                <li><a href="https://www.drupal.org/list-changes/published/drupal?keywords_description=&to_branch=&version=&created_op=%3E%3D&created[value]=&created[min]=&created[max]=&impacts[]=3" target="_blank">Drupal 8 Changelog for themers</a></li>
+                <li><a href="https://www.drupal.org/node/3060/release?api_version%5B%5D=7234" target="_blank">Drupal 8 Core [documentation & core implementations]</a></li>
+                <li><a href="http://twig.sensiolabs.org/" target="_blank">Twig Documentation</a></li>
+              </ul>
+            </div>
+            <!-- <div class="l-fifty">
               <ul>
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
               </ul>
-            </div>
-            <div class="l-fifty">
-              <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-            </div>
+            </div> -->
             <aside class="notes">
               <p></p>
             </aside>
@@ -1444,27 +1444,69 @@ picker:
 
         </section>
 
+        <!-- Demo Time -->
+        <section id="demo">
+          <section class="title-slide">
+            <h1>Demo Time</h1>
+          </section>
+        </section>
+
+        <!-- Custom Filter -->
         <section id="custom-filter">
+
           <section class="title-slide">
             <h1 class="slide--title">Custom Filters</h1>
             <aside class="notes"><p>You can create your own Twig filters to extend Twig. In Drupal 8 this can be done by creating a module that provides the filter.</p></aside>
           </section>
+
           <section name="custom-filter-step1">
             <h2 class="slide--title">1. Create a Module</h2>
+            <pre class="fragment"><code class="yml yaml" data-trim>
+name: 'trim string'
+description: 'Custom twig filters in use by the custom theme'
+version: 8.x
+core: 8.x
+package: 'FL DrupalCamp 2015'
+type: module
+            </code></pre>
             <aside class="notes">We'll need to create a custom module directory and then the corresponding module.info.yml to make our module available to Drupal 8.</aside>
           </section>
+
           <section name="custom-filter-step2">
             <h2 class="slide--title">2. Provide Filter as Service</h2>
-            <aside class="notes"></aside>
+              <pre class="fragment"><code class="php" data-trim>
+  &lt;?php
+
+  namespace Drupal\trim_string\TwigExtension;
+
+  use Drupal\Core\Template\TwigExtension;
+
+  class TrimStringTwigExtension extends \Twig_Extension {
+
+    public function getName() {
+      return 'trim_string.trim_string_twig_extension';
+    }
+  }
+              </code></pre>
+              <aside class="notes"><p>The directory structure here is important - this is just how object oriented PHP works - I'm not a PH developer, so I'm not exactly certain why, but it is important.</p></aside>
           </section>
+
           <section name="custom-filter-step3">
             <h2 class="slide--title">3. Tell Drupal about the new Service</h2>
+            <pre class="fragment"><code class="php" data-trim>
+
+            </code></pre>
             <aside class="notes"></aside>
           </section>
+
           <section name="custom-filter-step4">
             <h2 class="slide--title">4. Write the logic</h2>
+            <pre class="fragment"><code class="php" data-trim>
+
+            </code></pre>
             <aside class="notes"></aside>
           </section>
+
         </section>
 
       </div><!-- / .slides -->
